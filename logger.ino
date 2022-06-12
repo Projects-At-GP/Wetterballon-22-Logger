@@ -3,8 +3,9 @@
 #include <time.h>
 #include <stdio.h>
 
-#define PIN_SD_CS 0 /* digital pin to which sd-card cs slot is connected on the board */
-#define PIN_LED 0 /* digital pin to which a red led is connected */
+#define PIN_SD_SS 4/* digital pin to which sd-card ss slot is connected on the board */
+#define PIN_LED_RED 0
+#define PIN_LED_GREEN 0 
 
 #define PIN_CO A0 /* analog pin for CO */
 #define PIN_CH4 A0 /* analog pin for methane */
@@ -24,11 +25,12 @@ unsigned int CO2;
 
 void setup()
 {
-	pinMode ( PIN_LED, OUTPUT );
+	pinMode ( PIN_LED_RED, OUTPUT );
+	pinMode ( PIN_LED_GREEN, OUTPUT );
 
 	if ( !SD.begin( PIN_SD_CS ) )
 	{
-		digitalWrite ( PIN_LED, HIGH );
+		digitalWrite ( PIN_LED_RED, HIGH );
 		while ( 1 );
 	}
 
@@ -39,6 +41,7 @@ void setup()
 	if ( file )
 	{
 		file.write(header, 39);
+		digitalWrite ( PIN_LED_GREEN, HIGH );
 	}
 }
 
