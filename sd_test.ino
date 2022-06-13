@@ -23,13 +23,16 @@ void setup() {
   SD.remove("log.csv");
   
   File file = SD.open("log.csv", FILE_WRITE);
-  Serial.println("file's there");
 
   if (file)
   {
+    Serial.println("file's there");
     file.println("Hi, Bitch!");
     file.close();
     Serial.println("Done!");
+  } else
+  {
+    Serial.println("file's not there :(");
   }
 }
 
